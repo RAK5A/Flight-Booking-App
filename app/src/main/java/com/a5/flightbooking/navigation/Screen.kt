@@ -1,4 +1,4 @@
-package com.flightapp.navigation
+package com.a5.flightbooking.navigation
 
 sealed class Screen(val route: String) {
     object Splash : Screen("splash")

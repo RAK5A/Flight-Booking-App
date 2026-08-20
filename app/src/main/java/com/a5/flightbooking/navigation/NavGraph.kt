@@ -1,17 +1,17 @@
-package com.flightapp.navigation
+package com.a5.flightbooking.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.a5.flightbooking.ui.screens.BoardingPassScreen
-import com.a5.flightbooking.ui.screens.HomeScreen
-import com.a5.flightbooking.ui.screens.MyTicketsScreen
-import com.a5.flightbooking.ui.screens.NotificationsScreen
-import com.a5.flightbooking.ui.screens.PaymentScreen
-import com.a5.flightbooking.ui.screens.ProfileScreen
-import com.a5.flightbooking.ui.screens.SelectSeatScreen
-import com.a5.flightbooking.ui.screens.SplashScreen
+import com.a5.flightbooking.ui.screens.boardingpass.BoardingPassScreen
+import com.a5.flightbooking.ui.screens.home.HomeScreen
+import com.a5.flightbooking.ui.screens.tickets.MyTicketsScreen
+import com.a5.flightbooking.ui.screens.notification.NotificationsScreen
+import com.a5.flightbooking.ui.screens.payment.PaymentScreen
+import com.a5.flightbooking.ui.screens.profile.ProfileScreen
+import com.a5.flightbooking.ui.screens.seatselection.SelectSeatScreen
+import com.a5.flightbooking.ui.screens.onboarding.SplashScreen
 
 @Composable
 fun FlightNavGraph(navController: NavHostController) {

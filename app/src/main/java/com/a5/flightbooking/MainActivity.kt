@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.a5.flightbooking.ui.theme.FlightBookingAppTheme
-import com.flightapp.navigation.FlightNavGraph
+import com.a5.flightbooking.navigation.FlightNavGraph
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

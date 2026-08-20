@@ -1,4 +1,4 @@
-package com.a5.flightbooking.ui.screens
+package com.a5.flightbooking.ui.screens.onboarding
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

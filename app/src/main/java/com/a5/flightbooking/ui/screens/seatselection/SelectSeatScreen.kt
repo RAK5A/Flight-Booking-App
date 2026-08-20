@@ -1,4 +1,4 @@
-package com.a5.flightbooking.ui.screens
+package com.a5.flightbooking.ui.screens.seatselection
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
