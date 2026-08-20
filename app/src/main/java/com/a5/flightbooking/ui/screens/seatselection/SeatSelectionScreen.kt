@@ -1,4 +1,4 @@
-package com.example.flightapp.screens.seatselection
+package com.a5.flightbooking.ui.screens.seatselection
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

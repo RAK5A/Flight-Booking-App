@@ -1,4 +1,4 @@
-package com.example.flightapp.screens.results
+package com.a5.flightbooking.ui.screens.results
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
