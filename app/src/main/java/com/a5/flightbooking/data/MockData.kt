@@ -11,36 +11,36 @@ object MockData {
     val flights = listOf(
         Flight(
             id = "f1",
-            airline = "Canada Airways",
-            price = 550.0,
-            fromCity = "Canada", fromCode = "RRP",
-            toCity = "Mexico", toCode = "TNA",
-            departureDate = "10 June 2023",
+            airline = "Air Cambodia",
+            price = 85.0,
+            fromCity = "Phnom Penh", fromCode = "PNH",
+            toCity = "Siem Reap", toCode = "REP",
+            departureDate = "10 June 2026",
             departureTime = "02:00 PM",
-            arrivalTime = "04:50 PM",
-            durationMinutes = 170
+            arrivalTime = "02:55 PM",
+            durationMinutes = 55
         ),
         Flight(
             id = "f2",
-            airline = "Sky Glide Airlines",
-            price = 650.0,
-            fromCity = "Canada", fromCode = "CCP",
-            toCity = "Mexico", toCode = "RFS",
-            departureDate = "10 June 2023",
+            airline = "AirAsia Cambodia",
+            price = 95.0,
+            fromCity = "Phnom Penh", fromCode = "PNH",
+            toCity = "Hanoi", toCode = "HAN",
+            departureDate = "10 June 2026",
             departureTime = "09:15 AM",
-            arrivalTime = "12:05 PM",
-            durationMinutes = 170
+            arrivalTime = "10:00 AM",
+            durationMinutes = 45
         ),
         Flight(
             id = "f3",
-            airline = "Stellar Airways",
-            price = 500.0,
-            fromCity = "Canada", fromCode = "RHP",
-            toCity = "Mexico", toCode = "QTR",
-            departureDate = "10 June 2023",
+            airline = "Sky Angkor Airlines",
+            price = 180.0,
+            fromCity = "Phnom Penh", fromCode = "PNH",
+            toCity = "Bangkok", toCode = "BKK",
+            departureDate = "10 June 2026",
             departureTime = "06:30 AM",
-            arrivalTime = "09:20 AM",
-            durationMinutes = 170
+            arrivalTime = "07:50 AM",
+            durationMinutes = 80
         )
     )
 
@@ -73,7 +73,7 @@ object MockData {
         return Ticket(
             id = "t-$flightId",
             flight = flightById(flightId),
-            passenger = Passenger(name = "Mahmudul Hasan", citizenship = "Canada"),
+            passenger = Passenger(name = "Sokha Ly", citizenship = "Cambodia"),
             seat = seat,
             gate = "A4",
             terminal = "B3"
