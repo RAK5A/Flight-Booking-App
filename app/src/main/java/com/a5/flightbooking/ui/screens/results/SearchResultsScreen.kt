@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.a5.flightbooking.data.MockData
+import com.a5.flightbooking.data.Data
 
 // Owner: Person B
 // TODO: render MockData.flights as a LazyColumn list, each item tappable -> onSelectFlight(flight.id)
@@ -17,6 +17,6 @@ fun SearchResultsScreen(
 ) {
     Column(modifier = Modifier.fillMaxSize().padding(24.dp)) {
         Text("Search results / ticket list - TODO Person B")
-        Text("${MockData.flights.size} mock flights available")
+        Text("${Data.flights.size} mock flights available")
     }
 }

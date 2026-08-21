@@ -59,12 +59,12 @@ fun PaymentScreen(onBack: () -> Unit) {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     FlightRouteRow(
-                        fromCode = "RRP",
-                        toCode = "TNA",
-                        fromLabel = "Canada",
-                        toLabel = "Mexico",
-                        date = "10 June 2023",
-                        duration = "2 hour 50 min"
+                        fromCode = com.a5.flightbooking.data.Data.flights.first().fromCode,
+                        toCode = com.a5.flightbooking.data.Data.flights.first().toCode,
+                        fromLabel = com.a5.flightbooking.data.Data.flights.first().fromCity,
+                        toLabel = com.a5.flightbooking.data.Data.flights.first().toCity,
+                        date = com.a5.flightbooking.data.Data.flights.first().departureDate,
+                        duration = "${com.a5.flightbooking.data.Data.flights.first().durationMinutes} min"
                     )
                 }
             }

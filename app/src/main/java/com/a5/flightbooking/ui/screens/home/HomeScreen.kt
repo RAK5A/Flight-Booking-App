@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a5.flightbooking.data.Data
 import com.a5.flightbooking.ui.components.FlightBottomNav
 import com.a5.flightbooking.ui.components.PrimaryButton
 import com.a5.flightbooking.ui.components.TicketCard
@@ -36,12 +37,9 @@ fun HomeScreen(
 ) {
     var selectedRoute by remember { mutableStateOf("home") }
     var travelers by remember { mutableIntStateOf(4) }
+    val firstFlight = Data.flights.first()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundLight)
-    ) {
+    Column(modifier = Modifier.fillMaxSize().background(BackgroundLight)) {
         // Header
         Column(
             modifier = Modifier
@@ -56,58 +54,29 @@ fun HomeScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Avatar
                     Box(
-                        modifier = Modifier
-                            .size(44.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFF8B9DC3)),
+                        modifier = Modifier.size(44.dp).clip(CircleShape).background(Color(0xFF8B9DC3)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(
-                            Icons.Default.Person,
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(26.dp)
-                        )
+                        Icon(Icons.Default.Person, contentDescription = null, tint = Color.White, modifier = Modifier.size(26.dp))
                     }
                     Spacer(Modifier.width(10.dp))
                     Column {
-                        Text(
-                            "Good Morning",
-                            color = Color.White.copy(alpha = 0.7f),
-                            fontSize = 12.sp
-                        )
-                        Text(
-                            "Shahinur Rahman",
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
+                        Text("Good Morning", color = Color.White.copy(alpha = 0.7f), fontSize = 12.sp)
+                        Text(Data.passenger.name, color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                     }
                 }
                 IconButton(
                     onClick = onNotificationClick,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.15f))
+                    modifier = Modifier.size(40.dp).clip(CircleShape).background(Color.White.copy(alpha = 0.15f))
                 ) {
                     Icon(Icons.Default.Notifications, contentDescription = null, tint = Color.White)
                 }
             }
-
             Spacer(Modifier.height(20.dp))
-            Text(
-                "Securely Book\nyour Flight Ticket",
-                color = Color.White,
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Bold,
-                lineHeight = 34.sp
-            )
+            Text("Securely Book\nyour Flight Ticket", color = Color.White, fontSize = 26.sp, fontWeight = FontWeight.Bold, lineHeight = 34.sp)
         }
 
-        // Search Card
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -123,45 +92,27 @@ fun HomeScreen(
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
-                    // From field
                     SearchField(
                         label = "From",
-                        value = "United States of America",
+                        value = "${firstFlight.fromCity} (${firstFlight.fromCode})",
                         icon = Icons.Default.FlightTakeoff
                     )
                     Spacer(Modifier.height(12.dp))
-
-                    // To field
                     SearchField(
                         label = "To",
-                        value = "United Arab Emirates",
+                        value = "${firstFlight.toCity} (${firstFlight.toCode})",
                         icon = Icons.Default.FlightLand
                     )
                     Spacer(Modifier.height(12.dp))
-
-                    // Departure and Return
                     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        DateField(
-                            label = "Departure",
-                            value = "10 June 2023",
-                            modifier = Modifier.weight(1f)
-                        )
-                        DateField(
-                            label = "Return",
-                            value = "12 Jun 2023",
-                            modifier = Modifier.weight(1f)
-                        )
+                        DateField(label = "Departure", value = firstFlight.departureDate, modifier = Modifier.weight(1f))
+                        DateField(label = "Return", value = "12 June 2026", modifier = Modifier.weight(1f))
                     }
                     Spacer(Modifier.height(12.dp))
-
-                    // Travelers
                     Column {
                         Text("Travelers", color = TextSecondary, fontSize = 12.sp)
                         Spacer(Modifier.height(6.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                             Text(
                                 "${travelers} Person",
                                 color = TextPrimary,
@@ -172,10 +123,7 @@ fun HomeScreen(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 IconButton(
                                     onClick = { if (travelers > 1) travelers-- },
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                        .clip(CircleShape)
-                                        .border(1.dp, BorderLight, CircleShape)
+                                    modifier = Modifier.size(32.dp).clip(CircleShape).border(1.dp, BorderLight, CircleShape)
                                 ) {
                                     Icon(Icons.Default.Remove, contentDescription = null, modifier = Modifier.size(16.dp))
                                 }
@@ -187,10 +135,7 @@ fun HomeScreen(
                                 )
                                 IconButton(
                                     onClick = { travelers++ },
-                                    modifier = Modifier
-                                        .size(32.dp)
-                                        .clip(CircleShape)
-                                        .background(NavyDark)
+                                    modifier = Modifier.size(32.dp).clip(CircleShape).background(NavyDark)
                                 ) {
                                     Icon(Icons.Default.Add, contentDescription = null, tint = Color.White, modifier = Modifier.size(16.dp))
                                 }
@@ -204,7 +149,6 @@ fun HomeScreen(
 
             Spacer(Modifier.height(24.dp))
 
-            // Upcoming flights
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -215,17 +159,14 @@ fun HomeScreen(
             }
             Spacer(Modifier.height(12.dp))
 
-            val flights = listOf(
-                Triple("Canada Airways", "\$550", "RRP" to "TNA"),
-                Triple("Sky Glide Airlines", "\$650", "CCP" to "RFS"),
-                Triple("Stellar Airways", "\$500", "RHP" to "QTR")
-            )
-            flights.forEach { (name, price, route) ->
+            Data.flights.forEach { flight ->
                 TicketCard(
-                    airlineName = name,
-                    price = price,
-                    fromCode = route.first,
-                    toCode = route.second,
+                    airlineName = flight.airline,
+                    price = "$${flight.price.toInt()}",
+                    fromCode = flight.fromCode,
+                    toCode = flight.toCode,
+                    fromLabel = flight.fromCity,
+                    toLabel = flight.toCity,
                     onClick = onTicketClick
                 )
                 Spacer(Modifier.height(12.dp))
@@ -249,11 +190,7 @@ fun HomeScreen(
 @Composable
 fun SearchField(label: String, value: String, icon: ImageVector) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(12.dp))
-            .background(BackgroundLight)
-            .padding(12.dp)
+        modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(BackgroundLight).padding(12.dp)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(icon, contentDescription = null, tint = TextSecondary, modifier = Modifier.size(18.dp))
@@ -268,12 +205,7 @@ fun SearchField(label: String, value: String, icon: ImageVector) {
 
 @Composable
 fun DateField(label: String, value: String, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(BackgroundLight)
-            .padding(12.dp)
-    ) {
+    Column(modifier = modifier.clip(RoundedCornerShape(12.dp)).background(BackgroundLight).padding(12.dp)) {
         Text(label, color = TextSecondary, fontSize = 11.sp)
         Text(value, color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.Medium)
     }

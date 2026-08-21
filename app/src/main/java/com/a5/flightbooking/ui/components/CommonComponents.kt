@@ -274,6 +274,8 @@ fun TicketCard(
     price: String,
     fromCode: String,
     toCode: String,
+    fromLabel: String = "Phnom Penh",
+    toLabel: String = "Hanoi",
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -290,25 +292,15 @@ fun TicketCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = airlineName,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = TextPrimary
-                )
-                Text(
-                    text = price,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary
-                )
+                Text(text = airlineName, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                Text(text = price, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             }
             Spacer(Modifier.height(12.dp))
             FlightRouteRow(
                 fromCode = fromCode,
                 toCode = toCode,
-                fromLabel = "Canada",
-                toLabel = "Mexico"
+                fromLabel = fromLabel,
+                toLabel = toLabel
             )
         }
     }
