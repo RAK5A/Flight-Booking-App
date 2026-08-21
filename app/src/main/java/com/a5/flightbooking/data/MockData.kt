@@ -3,7 +3,7 @@ package com.a5.flightbooking.data
 import com.a5.flightbooking.model.Flight
 import com.a5.flightbooking.model.Passenger
 
-object Data {
+object MockData {
     val flights = listOf(
         Flight(
             id = "f1",

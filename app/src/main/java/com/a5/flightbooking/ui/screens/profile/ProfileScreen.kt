@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.a5.flightbooking.data.Data
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightTopBar
 import com.a5.flightbooking.ui.components.PrimaryButton
 import com.a5.flightbooking.ui.theme.BackgroundLight
@@ -77,13 +77,13 @@ fun ProfileScreen(onBack: () -> Unit) {
                     }
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        Data.passenger.name,
+                        MockData.passenger.name,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
                     )
                     Spacer(Modifier.height(4.dp))
-                    Text(Data.passenger.email, fontSize = 13.sp, color = TextSecondary)
+                    Text(MockData.passenger.email, fontSize = 13.sp, color = TextSecondary)
                 }
             }
 

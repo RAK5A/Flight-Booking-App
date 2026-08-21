@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.a5.flightbooking.data.Data
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightBottomNav
 import com.a5.flightbooking.ui.components.PrimaryButton
 import com.a5.flightbooking.ui.components.TicketCard
@@ -37,7 +37,7 @@ fun HomeScreen(
 ) {
     var selectedRoute by remember { mutableStateOf("home") }
     var travelers by remember { mutableIntStateOf(4) }
-    val firstFlight = Data.flights.first()
+    val firstFlight = MockData.flights.first()
 
     Column(modifier = Modifier.fillMaxSize().background(BackgroundLight)) {
         // Header
@@ -63,7 +63,7 @@ fun HomeScreen(
                     Spacer(Modifier.width(10.dp))
                     Column {
                         Text("Good Morning", color = Color.White.copy(alpha = 0.7f), fontSize = 12.sp)
-                        Text(Data.passenger.name, color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
+                        Text(MockData.passenger.name, color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)
                     }
                 }
                 IconButton(
@@ -159,7 +159,7 @@ fun HomeScreen(
             }
             Spacer(Modifier.height(12.dp))
 
-            Data.flights.forEach { flight ->
+            MockData.flights.forEach { flight ->
                 TicketCard(
                     airlineName = flight.airline,
                     price = "$${flight.price.toInt()}",

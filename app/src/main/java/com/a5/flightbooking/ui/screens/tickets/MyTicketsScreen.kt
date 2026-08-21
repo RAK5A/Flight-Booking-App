@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.a5.flightbooking.data.Data
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightBottomNav
 import com.a5.flightbooking.ui.components.FlightRouteRow
 import com.a5.flightbooking.ui.components.TicketCard
@@ -32,7 +32,7 @@ fun MyTicketsScreen(
     onHomeClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("my_tickets") }
-    val firstFlight = Data.flights.first()
+    val firstFlight = MockData.flights.first()
 
     Column(modifier = Modifier.fillMaxSize().background(BackgroundLight)) {
         Column(
@@ -79,7 +79,7 @@ fun MyTicketsScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(vertical = 20.dp)
         ) {
-            items(Data.flights) { flight ->
+            items(MockData.flights) { flight ->
                 TicketCard(
                     airlineName = flight.airline,
                     price = "$${flight.price.toInt()}",
