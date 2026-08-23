@@ -16,8 +16,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightTopBar
 import com.a5.flightbooking.ui.components.PrimaryButton
 import com.a5.flightbooking.ui.theme.BackgroundLight
@@ -25,6 +27,7 @@ import com.a5.flightbooking.ui.theme.BorderLight
 import com.a5.flightbooking.ui.theme.NavyDark
 import com.a5.flightbooking.ui.theme.TextPrimary
 import com.a5.flightbooking.ui.theme.TextSecondary
+
 @Composable
 fun ProfileScreen(onBack: () -> Unit) {
     Column(
@@ -36,8 +39,7 @@ fun ProfileScreen(onBack: () -> Unit) {
             title = "Profile",
             onBack = onBack,
             trailingIcon = Icons.Default.Edit,
-            onTrailingClick = {}
-        )
+            onTrailingClick = {})
 
         Column(
             modifier = Modifier
@@ -65,8 +67,7 @@ fun ProfileScreen(onBack: () -> Unit) {
                         modifier = Modifier
                             .size(90.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF8B9DC3)),
-                        contentAlignment = Alignment.Center
+                            .background(Color(0xFF8B9DC3)), contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             Icons.Default.Person,
@@ -77,17 +78,13 @@ fun ProfileScreen(onBack: () -> Unit) {
                     }
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "Shahinur Rahman",
+                        MockData.passenger.name,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary
                     )
                     Spacer(Modifier.height(4.dp))
-                    Text(
-                        "Shahinurst02@gmail.com",
-                        fontSize = 13.sp,
-                        color = TextSecondary
-                    )
+                    Text(MockData.passenger.email, fontSize = 13.sp, color = TextSecondary)
                 }
             }
 
@@ -110,14 +107,10 @@ fun ProfileScreen(onBack: () -> Unit) {
                         showDivider = true
                     )
                     ProfileMenuItem(
-                        icon = Icons.Default.Language,
-                        label = "Language",
-                        showDivider = true
+                        icon = Icons.Default.Language, label = "Language", showDivider = true
                     )
                     ProfileMenuItem(
-                        icon = Icons.Default.DarkMode,
-                        label = "Dark theme",
-                        showDivider = false
+                        icon = Icons.Default.DarkMode, label = "Dark theme", showDivider = false
                     )
                 }
             }
@@ -135,9 +128,7 @@ fun ProfileScreen(onBack: () -> Unit) {
                 elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
             ) {
                 ProfileMenuItem(
-                    icon = Icons.Default.HelpOutline,
-                    label = "Help center",
-                    showDivider = false
+                    icon = Icons.Default.HelpOutline, label = "Help center", showDivider = false
                 )
             }
 
@@ -158,18 +149,13 @@ fun ProfileScreen(onBack: () -> Unit) {
 @Composable
 fun SectionLabel(text: String) {
     Text(
-        text = text,
-        fontWeight = FontWeight.Bold,
-        fontSize = 16.sp,
-        color = TextPrimary
+        text = text, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = TextPrimary
     )
 }
 
 @Composable
 fun ProfileMenuItem(
-    icon: ImageVector,
-    label: String,
-    showDivider: Boolean
+    icon: ImageVector, label: String, showDivider: Boolean
 ) {
     Column {
         Row(
@@ -182,8 +168,7 @@ fun ProfileMenuItem(
                 modifier = Modifier
                     .size(36.dp)
                     .clip(RoundedCornerShape(10.dp))
-                    .background(BackgroundLight),
-                contentAlignment = Alignment.Center
+                    .background(BackgroundLight), contentAlignment = Alignment.Center
             ) {
                 Icon(
                     icon,
@@ -209,9 +194,14 @@ fun ProfileMenuItem(
         }
         if (showDivider) {
             HorizontalDivider(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                color = BorderLight
+                modifier = Modifier.padding(horizontal = 16.dp), color = BorderLight
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun ProfileScreenPreview() {
+    ProfileScreen {  }
 }

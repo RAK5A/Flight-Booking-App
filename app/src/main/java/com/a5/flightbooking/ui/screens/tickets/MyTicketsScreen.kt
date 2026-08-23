@@ -14,20 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightBottomNav
 import com.a5.flightbooking.ui.components.FlightRouteRow
 import com.a5.flightbooking.ui.components.TicketCard
 import com.a5.flightbooking.ui.theme.BackgroundLight
 import com.a5.flightbooking.ui.theme.NavyDark
-
-data class FlightTicket(
-    val airline: String,
-    val price: String,
-    val from: String,
-    val to: String
-)
 
 @Composable
 fun MyTicketsScreen(
@@ -35,20 +30,13 @@ fun MyTicketsScreen(
     onTicketClick: () -> Unit,
     onNotificationClick: () -> Unit,
     onProfileClick: () -> Unit,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    onHistoryClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("my_tickets") }
-
-    val tickets = listOf(
-        FlightTicket("Canada Airways", "\$550", "RRP", "TNA"),
-        FlightTicket("Sky Glide Airlines", "\$650", "CCP", "RFS"),
-        FlightTicket("Stellar Airways", "\$500", "RHP", "QTR"),
-        FlightTicket("Pacific Star Airways", "\$450", "LGA", "DXB"),
-        FlightTicket("Blue Horizon Air", "\$720", "JFK", "CDG")
-    )
+    val firstFlight = MockData.flights.first()
 
     Column(modifier = Modifier.fillMaxSize().background(BackgroundLight)) {
-        // Header with profile
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -62,62 +50,45 @@ fun MyTicketsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
-                    modifier = Modifier
-                        .size(44.dp)
-                        .clip(CircleShape)
-                        .background(Color(0xFF8B9DC3)),
+                    modifier = Modifier.size(44.dp).clip(CircleShape).background(Color(0xFF8B9DC3)),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(Icons.Default.Person, contentDescription = null, tint = Color.White, modifier = Modifier.size(26.dp))
                 }
-
-                Text(
-                    "My Ticket",
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold
-                )
-
+                Text("My Ticket", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
                 IconButton(
                     onClick = onNotificationClick,
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(Color.White.copy(alpha = 0.15f))
+                    modifier = Modifier.size(40.dp).clip(CircleShape).background(Color.White.copy(alpha = 0.15f))
                 ) {
                     Icon(Icons.Default.Notifications, contentDescription = null, tint = Color.White)
                 }
             }
-
-            Spacer(Modifier.height(20.dp))
-
-            // Summary route in header
-            FlightRouteRow(
-                fromCode = "RRP",
-                toCode = "TNA",
-                fromLabel = "Canada",
-                toLabel = "Mexico",
-                date = "10 June 2023",
-                duration = "2 hour 50 min",
-                codeColor = Color.White,
-                labelColor = Color.White.copy(alpha = 0.6f)
-            )
+//            Spacer(Modifier.height(20.dp))
+//            FlightRouteRow(
+//                fromCode = firstFlight.fromCode,
+//                toCode = firstFlight.toCode,
+//                fromLabel = firstFlight.fromCity,
+//                toLabel = firstFlight.toCity,
+//                date = firstFlight.departureDate,
+//                duration = "${firstFlight.durationMinutes} min",
+//                codeColor = Color.White,
+//                labelColor = Color.White.copy(alpha = 0.6f)
+//            )
         }
 
         LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(horizontal = 20.dp),
+            modifier = Modifier.fillMaxWidth().weight(1f).padding(horizontal = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(vertical = 20.dp)
         ) {
-            items(tickets) { ticket ->
+            items(MockData.flights) { flight ->
                 TicketCard(
-                    airlineName = ticket.airline,
-                    price = ticket.price,
-                    fromCode = ticket.from,
-                    toCode = ticket.to,
+                    airlineName = flight.airline,
+                    price = "$${flight.price.toInt()}",
+                    fromCode = flight.fromCode,
+                    toCode = flight.toCode,
+                    fromLabel = flight.fromCity,
+                    toLabel = flight.toCity,
                     onClick = onTicketClick
                 )
             }
@@ -130,8 +101,21 @@ fun MyTicketsScreen(
                 when (route) {
                     "home" -> onHomeClick()
                     "settings" -> onProfileClick()
+                    "history" -> onHistoryClick()
                 }
             }
         )
     }
+}
+
+@Composable
+@Preview
+fun MyTicketsScreenPreview() {
+    MyTicketsScreen(
+        onBack = {},
+        onTicketClick = {},
+        onNotificationClick = {},
+        onProfileClick = {},
+        onHomeClick = {}
+    ) { }
 }

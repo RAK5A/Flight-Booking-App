@@ -17,8 +17,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a5.flightbooking.data.MockData
 import com.a5.flightbooking.ui.components.FlightRouteRow
 import com.a5.flightbooking.ui.components.FlightTopBar
 import com.a5.flightbooking.ui.components.PrimaryButton
@@ -28,12 +30,13 @@ import com.a5.flightbooking.ui.theme.TextPrimary
 import com.a5.flightbooking.ui.theme.TextSecondary
 
 @Composable
-fun PaymentScreen(onBack: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(BackgroundLight)
-    ) {
+fun PaymentScreen(
+    onBack: () -> Unit,
+    onPaySuccess: () -> Unit
+) {
+    val flight = MockData.flights.first()
+
+    Column(modifier = Modifier.fillMaxSize().background(BackgroundLight)) {
         FlightTopBar(
             title = "Payment Method",
             onBack = onBack,
@@ -50,7 +53,6 @@ fun PaymentScreen(onBack: () -> Unit) {
         ) {
             Spacer(Modifier.height(16.dp))
 
-            // Flight route summary
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp),
@@ -59,42 +61,25 @@ fun PaymentScreen(onBack: () -> Unit) {
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     FlightRouteRow(
-                        fromCode = "RRP",
-                        toCode = "TNA",
-                        fromLabel = "Canada",
-                        toLabel = "Mexico",
-                        date = "10 June 2023",
-                        duration = "2 hour 50 min"
+                        fromCode = flight.fromCode,
+                        toCode = flight.toCode,
+                        fromLabel = flight.fromCity,
+                        toLabel = flight.toCity,
+                        date = flight.departureDate,
+                        duration = "${flight.durationMinutes} min"
                     )
                 }
             }
 
             Spacer(Modifier.height(20.dp))
-
-            // Payment Method section
-            Text(
-                "Payment method",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = TextPrimary
-            )
+            Text("Payment method", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             Spacer(Modifier.height(12.dp))
 
-            // Mastercard
-            PaymentMethodCard(
-                icon = { MastercardIcon() },
-                cardNumber = "9876 1234 3456 4321"
-            )
+            PaymentMethodCard(icon = { MastercardIcon() }, cardNumber = "9876 1234 3456 4321")
+            Spacer(Modifier.height(10.dp))
+            PaymentMethodCard(icon = { ApplePayIcon() }, cardNumber = "3214 1234 3456 9274")
             Spacer(Modifier.height(10.dp))
 
-            // Apple Pay
-            PaymentMethodCard(
-                icon = { ApplePayIcon() },
-                cardNumber = "3214 1234 3456 9274"
-            )
-            Spacer(Modifier.height(10.dp))
-
-            // Add new method
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -103,23 +88,11 @@ fun PaymentScreen(onBack: () -> Unit) {
                     .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    "Add New Method",
-                    color = TextPrimary,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
-                )
+                Text("Add New Method", color = TextPrimary, fontSize = 14.sp, fontWeight = FontWeight.Medium)
             }
 
             Spacer(Modifier.height(20.dp))
-
-            // Payment details
-            Text(
-                "Payment details",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold,
-                color = TextPrimary
-            )
+            Text("Payment details", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             Spacer(Modifier.height(12.dp))
 
             Card(
@@ -152,13 +125,8 @@ fun PaymentScreen(onBack: () -> Unit) {
             Spacer(Modifier.height(16.dp))
         }
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .padding(20.dp)
-        ) {
-            PrimaryButton("Pay Now", onClick = {})
+        Box(modifier = Modifier.fillMaxWidth().background(Color.White).padding(20.dp)) {
+            PrimaryButton("Pay Now", onClick = onPaySuccess)
         }
     }
 }
@@ -255,4 +223,12 @@ fun PaymentDetailRow(label: String, amount: String, muted: Boolean) {
             fontWeight = if (muted) FontWeight.Normal else FontWeight.SemiBold
         )
     }
+}
+
+@Composable
+@Preview
+fun PaymentScreenPreview() {
+    PaymentScreen(
+        onBack = {}
+    ) { }
 }

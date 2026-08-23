@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.ui.components.FlightTopBar
@@ -237,4 +238,12 @@ fun SeatLegendItem(color: Color, label: String, bordered: Boolean = false) {
         Spacer(Modifier.width(6.dp))
         Text(label, fontSize = 12.sp, color = TextSecondary)
     }
+}
+
+@Composable
+@Preview
+fun SelectSeatScreenPreview() {
+    SelectSeatScreen(
+        onBack = {}
+    ) { }   
 }

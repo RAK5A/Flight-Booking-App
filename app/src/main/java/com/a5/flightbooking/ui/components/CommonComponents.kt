@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.ui.theme.DashedLine
@@ -101,8 +102,8 @@ fun FlightTopBar(
 fun FlightRouteRow(
     fromCode: String,
     toCode: String,
-    fromLabel: String = "Canada",
-    toLabel: String = "Mexico",
+    fromLabel: String = "Phnom Penh",
+    toLabel: String = "Siem Reab",
     date: String = "10 June 2023",
     duration: String = "2 hour 50 min",
     codeColor: Color = TextPrimary,
@@ -274,6 +275,8 @@ fun TicketCard(
     price: String,
     fromCode: String,
     toCode: String,
+    fromLabel: String = "Phnom Penh",
+    toLabel: String = "Hanoi",
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -290,26 +293,31 @@ fun TicketCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = airlineName,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = TextPrimary
-                )
-                Text(
-                    text = price,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextPrimary
-                )
+                Text(text = airlineName, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = TextPrimary)
+                Text(text = price, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
             }
             Spacer(Modifier.height(12.dp))
             FlightRouteRow(
                 fromCode = fromCode,
                 toCode = toCode,
-                fromLabel = "Canada",
-                toLabel = "Mexico"
+                fromLabel = fromLabel,
+                toLabel = toLabel
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun FlightRoutePreview() {
+    FlightRouteRow(
+        fromCode = "PNH",
+        toCode = "SR",
+        fromLabel = "Phnom Penh",
+        toLabel = "Siem Reab",
+        date = "20 August 2026",
+        duration = "60min",
+        codeColor = TextPrimary,
+        labelColor = TextSecondary
+    )
 }

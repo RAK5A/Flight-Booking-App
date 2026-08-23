@@ -10,15 +10,13 @@ import com.a5.flightbooking.ui.screens.tickets.MyTicketsScreen
 import com.a5.flightbooking.ui.screens.notification.NotificationsScreen
 import com.a5.flightbooking.ui.screens.payment.PaymentScreen
 import com.a5.flightbooking.ui.screens.profile.ProfileScreen
+import com.a5.flightbooking.ui.screens.history.HistoryScreen
 import com.a5.flightbooking.ui.screens.seatselection.SelectSeatScreen
 import com.a5.flightbooking.ui.screens.onboarding.SplashScreen
 
 @Composable
 fun FlightNavGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController,
-        startDestination = Screen.Splash.route
-    ) {
+    NavHost(navController = navController, startDestination = Screen.Splash.route) {
         composable(Screen.Splash.route) {
             SplashScreen(onGetStarted = {
                 navController.navigate(Screen.Home.route) {
@@ -30,24 +28,32 @@ fun FlightNavGraph(navController: NavHostController) {
             HomeScreen(
                 onTicketClick = { navController.navigate(Screen.MyTickets.route) },
                 onNotificationClick = { navController.navigate(Screen.Notifications.route) },
-                onProfileClick = { navController.navigate(Screen.Profile.route) }
+                onProfileClick = { navController.navigate(Screen.Profile.route) },
+                onHistoryClick = { navController.navigate(Screen.History.route) }
             )
         }
         composable(Screen.MyTickets.route) {
             MyTicketsScreen(
                 onBack = { navController.popBackStack() },
-                onTicketClick = { navController.navigate(Screen.BoardingPass.route) },
+                onTicketClick = { navController.navigate(Screen.SelectSeat.route) },
                 onNotificationClick = { navController.navigate(Screen.Notifications.route) },
                 onProfileClick = { navController.navigate(Screen.Profile.route) },
                 onHomeClick = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }
                     }
-                }
+                },
+                onHistoryClick = { navController.navigate(Screen.History.route) }
             )
         }
-        composable(Screen.BoardingPass.route) {
-            BoardingPassScreen(onBack = { navController.popBackStack() })
+        composable(Screen.History.route) {
+            HistoryScreen(
+                onHomeClick = {
+                    navController.navigate(Screen.Home.route) { popUpTo(Screen.Home.route) { inclusive = true } }
+                },
+                onTicketClick = { navController.navigate(Screen.MyTickets.route) },
+                onProfileClick = { navController.navigate(Screen.Profile.route) }
+            )
         }
         composable(Screen.SelectSeat.route) {
             SelectSeatScreen(
@@ -56,7 +62,17 @@ fun FlightNavGraph(navController: NavHostController) {
             )
         }
         composable(Screen.Payment.route) {
-            PaymentScreen(onBack = { navController.popBackStack() })
+            PaymentScreen(
+                onBack = { navController.popBackStack() },
+                onPaySuccess = {
+                    navController.navigate(Screen.BoardingPass.route) {
+                        popUpTo(Screen.Home.route)
+                    }
+                }
+            )
+        }
+        composable(Screen.BoardingPass.route) {
+            BoardingPassScreen(onBack = { navController.popBackStack() })
         }
         composable(Screen.Notifications.route) {
             NotificationsScreen(onBack = { navController.popBackStack() })

@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.ui.components.FlightTopBar
@@ -155,5 +156,27 @@ fun NotificationCard(item: NotificationItem) {
                 )
             }
         }
+    }
+}
+
+@Composable
+@Preview
+fun NotificationCardPreview() {
+    NotificationCard(
+        item = NotificationItem(
+            "Your booking has been successfully",
+            "Thank you for booking your flight ticket through our app. Your booking has been successfully processed and your ticket has been issued.",
+            "20 Jun 2023 • 08:30 PM",
+            Icons.Default.ConfirmationNumber
+        )
+    )
+}
+
+@Composable
+@Preview
+fun NotificationScreenPreview() {
+    NotificationsScreen()
+    {
+
     }
 }
