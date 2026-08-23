@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.ui.theme.DashedLine
@@ -101,8 +102,8 @@ fun FlightTopBar(
 fun FlightRouteRow(
     fromCode: String,
     toCode: String,
-    fromLabel: String = "Canada",
-    toLabel: String = "Mexico",
+    fromLabel: String = "Phnom Penh",
+    toLabel: String = "Siem Reab",
     date: String = "10 June 2023",
     duration: String = "2 hour 50 min",
     codeColor: Color = TextPrimary,
@@ -304,4 +305,19 @@ fun TicketCard(
             )
         }
     }
+}
+
+@Composable
+@Preview
+fun FlightRoutePreview() {
+    FlightRouteRow(
+        fromCode = "PNH",
+        toCode = "SR",
+        fromLabel = "Phnom Penh",
+        toLabel = "Siem Reab",
+        date = "20 August 2026",
+        duration = "60min",
+        codeColor = TextPrimary,
+        labelColor = TextSecondary
+    )
 }

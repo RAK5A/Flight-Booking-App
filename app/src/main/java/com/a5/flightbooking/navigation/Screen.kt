@@ -9,4 +9,5 @@ sealed class Screen(val route: String) {
     object Payment : Screen("payment")
     object Notifications : Screen("notifications")
     object Profile : Screen("profile")
+    object History : Screen("history")
 }

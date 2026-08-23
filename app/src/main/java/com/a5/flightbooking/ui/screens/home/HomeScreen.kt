@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.data.MockData
@@ -33,7 +34,8 @@ import com.a5.flightbooking.ui.theme.TextSecondary
 fun HomeScreen(
     onTicketClick: () -> Unit,
     onNotificationClick: () -> Unit,
-    onProfileClick: () -> Unit
+    onProfileClick: () -> Unit,
+    onHistoryClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("home") }
     var travelers by remember { mutableIntStateOf(4) }
@@ -181,6 +183,7 @@ fun HomeScreen(
                 when (route) {
                     "my_tickets" -> onTicketClick()
                     "settings" -> onProfileClick()
+                    "history" -> onHistoryClick()
                 }
             }
         )
@@ -209,4 +212,14 @@ fun DateField(label: String, value: String, modifier: Modifier = Modifier) {
         Text(label, color = TextSecondary, fontSize = 11.sp)
         Text(value, color = TextPrimary, fontSize = 13.sp, fontWeight = FontWeight.Medium)
     }
+}
+
+@Composable
+@Preview
+fun HomeScreenPreview() {
+    HomeScreen(
+        onTicketClick = {},
+        onNotificationClick = {},
+        onProfileClick = {}
+    ) { }
 }

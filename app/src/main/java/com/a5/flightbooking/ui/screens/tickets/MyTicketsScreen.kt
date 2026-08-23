@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a5.flightbooking.data.MockData
@@ -29,7 +30,8 @@ fun MyTicketsScreen(
     onTicketClick: () -> Unit,
     onNotificationClick: () -> Unit,
     onProfileClick: () -> Unit,
-    onHomeClick: () -> Unit
+    onHomeClick: () -> Unit,
+    onHistoryClick: () -> Unit
 ) {
     var selectedRoute by remember { mutableStateOf("my_tickets") }
     val firstFlight = MockData.flights.first()
@@ -61,17 +63,17 @@ fun MyTicketsScreen(
                     Icon(Icons.Default.Notifications, contentDescription = null, tint = Color.White)
                 }
             }
-            Spacer(Modifier.height(20.dp))
-            FlightRouteRow(
-                fromCode = firstFlight.fromCode,
-                toCode = firstFlight.toCode,
-                fromLabel = firstFlight.fromCity,
-                toLabel = firstFlight.toCity,
-                date = firstFlight.departureDate,
-                duration = "${firstFlight.durationMinutes} min",
-                codeColor = Color.White,
-                labelColor = Color.White.copy(alpha = 0.6f)
-            )
+//            Spacer(Modifier.height(20.dp))
+//            FlightRouteRow(
+//                fromCode = firstFlight.fromCode,
+//                toCode = firstFlight.toCode,
+//                fromLabel = firstFlight.fromCity,
+//                toLabel = firstFlight.toCity,
+//                date = firstFlight.departureDate,
+//                duration = "${firstFlight.durationMinutes} min",
+//                codeColor = Color.White,
+//                labelColor = Color.White.copy(alpha = 0.6f)
+//            )
         }
 
         LazyColumn(
@@ -99,8 +101,21 @@ fun MyTicketsScreen(
                 when (route) {
                     "home" -> onHomeClick()
                     "settings" -> onProfileClick()
+                    "history" -> onHistoryClick()
                 }
             }
         )
     }
+}
+
+@Composable
+@Preview
+fun MyTicketsScreenPreview() {
+    MyTicketsScreen(
+        onBack = {},
+        onTicketClick = {},
+        onNotificationClick = {},
+        onProfileClick = {},
+        onHomeClick = {}
+    ) { }
 }

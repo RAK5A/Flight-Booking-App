@@ -19,8 +19,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a5.flightbooking.navigation.Screen
 import com.a5.flightbooking.ui.components.FlightRouteRow
 import com.a5.flightbooking.ui.components.FlightTopBar
 import com.a5.flightbooking.ui.components.PrimaryButton
@@ -29,6 +31,7 @@ import com.a5.flightbooking.ui.theme.BorderLight
 import com.a5.flightbooking.ui.theme.DashedLine
 import com.a5.flightbooking.ui.theme.TextPrimary
 import com.a5.flightbooking.ui.theme.TextSecondary
+
 @Composable
 fun BoardingPassScreen(onBack: () -> Unit) {
     Column(
@@ -106,15 +109,29 @@ fun BoardingPassScreen(onBack: () -> Unit) {
                     Spacer(Modifier.height(16.dp))
 
                     // Departure / Arrival
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        InfoBlock(label = "Departure", value = "02:00 PM", modifier = Modifier.weight(1f))
-                        InfoBlock(label = "Arrival", value = "04:50 PM", modifier = Modifier.weight(1f))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        InfoBlock(
+                            label = "Departure",
+                            value = "02:00 PM",
+                            modifier = Modifier.weight(1f)
+                        )
+                        InfoBlock(
+                            label = "Arrival",
+                            value = "04:50 PM",
+                            modifier = Modifier.weight(1f)
+                        )
                     }
 
                     Spacer(Modifier.height(12.dp))
 
                     // Seat / Terminal / Gate
-                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
                         InfoBlock(label = "Seat", value = "3F", modifier = Modifier.weight(1f))
                         InfoBlock(label = "Terminal", value = "B3", modifier = Modifier.weight(1f))
                         InfoBlock(label = "Gate", value = "A4", modifier = Modifier.weight(1f))
@@ -187,7 +204,9 @@ fun TicketCutDivider() {
                 .clip(CircleShape)
                 .background(BackgroundLight)
         )
-        Canvas(modifier = Modifier.weight(1f).height(1.dp)) {
+        Canvas(modifier = Modifier
+            .weight(1f)
+            .height(1.dp)) {
             drawLine(
                 color = DashedLine,
                 start = Offset(0f, 0f),
@@ -229,5 +248,13 @@ fun BarcodeView(modifier: Modifier = Modifier) {
                 )
             }
         }
+    }
+}
+
+@Composable
+@Preview
+fun BoardingPassScreenPreview() {
+    BoardingPassScreen() {
+
     }
 }
