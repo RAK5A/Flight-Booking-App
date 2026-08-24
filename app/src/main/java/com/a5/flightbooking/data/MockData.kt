@@ -68,9 +68,13 @@ object MockData {
         return seats
     }
 
+    private val tickets = mutableMapOf<String, Ticket>()
+
+    fun ticketById(id: String): Ticket? = tickets[id]
+
     // Called after "Pay Now" — builds a fake ticket instead of hitting a real payment API
     fun createMockTicket(flightId: String, seat: Seat?): Ticket {
-        return Ticket(
+        val ticket = Ticket(
             id = "t-$flightId",
             flight = flightById(flightId),
             passenger = Passenger(name = "Mahmudul Hasan", citizenship = "Canada"),
@@ -78,5 +82,7 @@ object MockData {
             gate = "A4",
             terminal = "B3"
         )
+        tickets[ticket.id] = ticket
+        return ticket
     }
 }

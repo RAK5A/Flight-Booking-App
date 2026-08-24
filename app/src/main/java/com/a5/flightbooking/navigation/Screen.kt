@@ -9,8 +9,8 @@ sealed class Screen(val route: String) {
         fun createRoute(flightId: String) = "seat_selection/$flightId"
     }
 
-    object Payment : Screen("payment/{flightId}") {
-        fun createRoute(flightId: String) = "payment/$flightId"
+    object Payment : Screen("payment/{flightId}/{seatId}") {
+        fun createRoute(flightId: String, seatId: String) = "payment/$flightId/$seatId"
     }
 
     object BoardingPass : Screen("boarding_pass/{ticketId}") {
